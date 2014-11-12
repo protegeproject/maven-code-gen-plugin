@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+    
+    <groupId>edu.stanford.protege</groupId>
+    <artifactId>maven-code-gen-plugin</artifactId>
+    <version>1.0.3-SNAPSHOT</version>
+    <packaging>maven-plugin</packaging>
+
+    <name>Maven Code Generation Plug-in</name>
+    <description>Add Java code generated from an OWL ontology to a maven project.</description>
+    <url>http://protegewiki.stanford.edu/wiki/Protege-OWL_Code_Generator</url>
+    <organization>
+        <name>Stanford Center for Biomedical Informatics Research</name>
+        <url>http://bmir.stanford.edu/</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License</name>
+            <url>http://www.gnu.org/copyleft/lesser.html</url>
+        </license>
+    </licenses>    
+
+    <developers>
+        <developer>
+            <name>Timothy Redmond</name>
+            <email>tredmond@stanford.edu</email>
+        </developer>
+    </developers>
+    
+    <scm>
+        <connection>scm:git:git@github.com:protegeproject/code-generation.git</connection>
+        <developerConnection>scm:git:git@github.com:protegeproject/code-generation.git</developerConnection>
+        <url>https://github.com/protegeproject/code-generation</url>
+    </scm>
+    
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/protegeproject/code-generation/issues</url>
+    </issueManagement>
+
+    <dependencies>
+	  <dependency>
+		<groupId>edu.stanford.protege</groupId>
+		<artifactId>org.protege.editor.owl.codegeneration</artifactId>
+		<version>1.0.3-SNAPSHOT</version>
+	  </dependency>
+
+      <dependency>
+        <groupId>org.apache.maven.plugin-tools</groupId>
+        <artifactId>maven-plugin-annotations</artifactId>
+        <version>3.3</version>
+        <scope>provided</scope>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-plugin-api</artifactId>
+        <version>2.0</version>
+      </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>3.0</version>
+              <configuration>
+                <source>1.7</source>
+                <target>1.7</target>
+              </configuration>
+            </plugin>
+            <plugin>
+              <artifactId>maven-eclipse-plugin</artifactId>
+              <version>2.9</version>
+              <configuration>
+                <pde>true</pde>
+              </configuration>
+            </plugin>
+
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-plugin-plugin</artifactId>
+              <version>3.3</version>
+              <configuration>
+                <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>mojo-descriptor</id>
+                  <goals>
+                    <goal>descriptor</goal>
+                  </goals>
+                </execution>               
+              </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            org.codehaus.mojo
+                                        </groupId>
+                                        <artifactId>
+                                            exec-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [1.2.1,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>java</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute/>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
