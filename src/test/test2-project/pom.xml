@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+	
+	<groupId>edu.stanford.protege</groupId>
+	<artifactId>org.protege.editor.owl.codegeneration.testproject</artifactId>
+	<version>1.0.3-SNAPSHOT</version>
+	<packaging>jar</packaging>
+    <!-- <packaging>maven-plugin</packaging> -->
+
+	<name>Test project for OWL Code Generation Plug-in</name>
+    <description>Testing the Maven plugin in the OWL Code Generation Plugin</description>
+    <url>http://protegewiki.stanford.edu/wiki/Protege-OWL_Code_Generator</url>
+	<organization>
+		<name>Stanford Center for Biomedical Informatics Research</name>
+		<url>http://bmir.stanford.edu/</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License</name>
+			<url>http://www.gnu.org/copyleft/lesser.html</url>
+		</license>
+	</licenses>    
+
+	<developers>
+		<developer>
+			<name>Timothy Redmond</name>
+			<email>tredmond@stanford.edu</email>
+		</developer>
+        <developer>
+          <name>Jennifer Vendetti</name>
+          <email>vendetti@stanford.edu</email>
+        </developer>
+	</developers>
+	
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/protegeproject/code-generation/issues</url>
+	</issueManagement>
+
+	<dependencies>
+	  <dependency>
+		<groupId>edu.stanford.protege</groupId>
+		<artifactId>maven-code-gen-plugin</artifactId>
+		<version>1.0.3-SNAPSHOT</version>
+	  </dependency>
+
+	  <dependency>
+		<groupId>net.sourceforge.cobertura</groupId>
+		<artifactId>cobertura</artifactId>
+		<version>2.0</version>
+	  </dependency>
+
+	  <dependency>
+		<groupId>commons-cli</groupId>
+		<artifactId>commons-cli</artifactId>
+		<version>1.2</version>
+	  </dependency>
+      
+      <dependency>
+		<groupId>edu.stanford.protege</groupId>
+		<artifactId>org.protege.common</artifactId>
+		<version>4.3.0</version>
+      </dependency>
+
+      <dependency>
+		<groupId>edu.stanford.protege</groupId>
+		<artifactId>org.protege.editor.core.application</artifactId>
+		<version>4.3.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>edu.stanford.protege</groupId>
+        <artifactId>org.protege.editor.owl</artifactId>
+        <version>4.3.0</version>
+      </dependency>
+
+	  <dependency>
+		<groupId>com.hermit-reasoner</groupId>
+		<artifactId>org.semanticweb.hermit</artifactId>
+		<version>1.3.8.3</version>
+	  </dependency>
+
+      <dependency>
+		<groupId>net.sourceforge.owlapi</groupId>
+		<artifactId>jfact</artifactId>
+		<version>1.0.0</version>
+      </dependency>
+
+      <dependency>
+		<groupId>org.apache.maven.plugin-tools</groupId>
+		<artifactId>maven-plugin-annotations</artifactId>
+		<version>3.3</version>
+		<scope>provided</scope>
+	  </dependency>
+	  
+	  <dependency>
+		<groupId>org.apache.maven</groupId>
+		<artifactId>maven-plugin-api</artifactId>
+		<version>2.0</version>
+	  </dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>3.0</version>
+              <configuration>
+                <source>1.7</source>
+                <target>1.7</target>
+              </configuration>
+            </plugin>
+
+	        <plugin>
+		      <groupId>edu.stanford.protege</groupId>
+		      <artifactId>maven-code-gen-plugin</artifactId>
+		      <version>1.0.3-SNAPSHOT</version>
+		      <executions>
+			    <execution>
+				  <id>owl-codegen</id>
+				  <goals>
+					<goal>owl-codegen</goal>
+				  </goals>
+				  <configuration>
+					<inputOntologyFile>${basedir}/src/main/resources/CatalogueScheme.owl</inputOntologyFile>
+					<packageName>org.protege.editor.owl.codegeneration.maven.test2</packageName>
+					<factoryName>factory.test.CompoundFactory</factoryName> 
+					<outputDirectory>${basedir}/target/generated-sources/test2</outputDirectory>
+				  </configuration>
+			    </execution>
+		      </executions>
+	        </plugin>
+
+	        <plugin>
+		      <groupId>org.codehaus.mojo</groupId>
+		      <artifactId>build-helper-maven-plugin</artifactId>
+		      <executions>
+			    <execution>
+				  <id>add-source</id>
+				  <goals>
+					<goal>add-source</goal>
+				  </goals>
+				  <configuration>
+					<sources>
+					  <source>${basedir}/target/generated-sources/test1</source>
+					  <source>${basedir}/target/generated-sources/test2</source>
+					</sources>
+				  </configuration>
+			    </execution> 
+		      </executions>
+	        </plugin>
+
+
+		</plugins>
+	</build>
+</project>

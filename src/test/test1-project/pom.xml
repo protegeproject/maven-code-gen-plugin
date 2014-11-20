@@ -131,10 +131,9 @@
 				  </goals>
 				  <configuration>
 					<inputOntologyFile>${basedir}/src/main/resources/CatalogueScheme.owl</inputOntologyFile>
-					<packageName>org.protege.editor.owl.codegeneration.maven.test</packageName>
-					<factoryName>CatalogueFactory</factoryName> 
-					<!-- N.B. this will end up in the sub package as com.example.owl.factory.CatalgoueFactory-->
-					<outputDirectory>${basedir}/target/generated-sources/protege</outputDirectory>
+					<packageName>org.protege.editor.owl.codegeneration.maven.test1</packageName>
+					<factoryName>AtomicFactory</factoryName> 
+					<outputDirectory>${basedir}/target/generated-sources/test1</outputDirectory>
 				  </configuration>
 			    </execution>
 		      </executions>
@@ -151,7 +150,7 @@
 				  </goals>
 				  <configuration>
 					<sources>
-					  <source>${basedir}/target/generated-sources/protege</source>
+					  <source>${basedir}/target/generated-sources/test1</source>
 					</sources>
 				  </configuration>
 			    </execution> 

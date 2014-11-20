@@ -1,5 +1,7 @@
 package org.protege.editor.owl.codegeneration.maven.test;
 
+import org.protege.editor.owl.codegeneration.maven.test1.A;
+import org.protege.editor.owl.codegeneration.maven.test1.AtomicFactory;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 public class Test {
@@ -10,8 +12,8 @@ public class Test {
 	}
 	
 	public A foo() {
-		CatalogueFactory factory = new CatalogueFactory(ontology);
-		return factory.createB("test");
+		AtomicFactory factory = new AtomicFactory(ontology);
+		return factory.createA("hello");
 	}
-	
+
 }

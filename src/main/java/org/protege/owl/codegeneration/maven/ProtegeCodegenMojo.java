@@ -138,8 +138,16 @@ extends AbstractMojo
 
 		CodeGenerationOptions options = new CodeGenerationOptions();
 		options.setPackage(packageName);
-		options.setFactoryClassName(factoryName);
 		options.setOutputFolder(outputFolder);
+		
+		int factoryPackageSplittingPoint = factoryName.lastIndexOf('.');
+		if (factoryPackageSplittingPoint < 0) {
+			options.setFactoryClassName(factoryName);
+		}
+		else {
+			options.setFactoryClassName(factoryName.substring(factoryPackageSplittingPoint+1));
+			options.setFactorySubPackage(factoryName.substring(0, factoryPackageSplittingPoint));
+		}
 
 		CodeGenerationInference inference;
 		if (reasonerFactoryName != null) {
